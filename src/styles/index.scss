@@ -1,5 +1,7 @@
 $color: blue;
-
+@import 'base/all';
 div {
-	background: $color;
+	background: $color url('../images/StockGraph.jpg');
+	width: 300px;
+	height: 300px;
 }
