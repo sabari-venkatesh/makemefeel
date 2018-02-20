@@ -2,24 +2,26 @@ import webpack from 'webpack';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
+
+const isProd = process.env.APP_ENV === 'prod';
 
 const extractSass = new ExtractTextPlugin({
     filename: "css/[name].[contenthash].css",
-})
+});
 
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
-	entry: {
-        app: './index.js'
-    } ,
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-      	filename: 'js/[chunkhash].[name].js'
-    },
+    devtool: (isProd ? 'source-map': 'eval-source-map'),
     devServer: {
 		contentBase: path.join(__dirname, "dist"),
-      	watchContentBase: true
+        hotOnly: true,
+        port: 8008,
+        watchContentBase: true,
     },
+	entry: {
+        app: './index.js'
+    },    
     module: {
 		rules: [
         	{
@@ -35,7 +37,7 @@ module.exports = {
           		]
         	},
         	{
-          		test: /\.scss$/,
+          		test: /\.(sass|scss)$/,
                 exclude: /node_modules/,
 	            use: extractSass.extract({
 	                use: [{
@@ -70,17 +72,25 @@ module.exports = {
             }
     	]
     },
-
-    devServer: {
-        port: 8080,
+    output: {
+		filename: 'js/[chunkhash].[name].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
-
     plugins: [
     	extractSass,
         new HtmlWebpackPlugin({
             filename: 'index.html', //Name of file in ./dist/
             template: 'index.html', //Name of template in ./src
             hash: true,
+            inject: 'body'
         }),
+        new BrowserSyncPlugin({
+            host: 'localhost',
+            port: 3000,
+            proxy: 'http://localhost:8008/',
+        }, {
+            reload: false
+        })
     ]
 }
