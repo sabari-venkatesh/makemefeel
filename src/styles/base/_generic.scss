@@ -1,0 +1,37 @@
+$font-stack: Arial;
+$link-color: blue;
+$link-color-hover: white;
+
+html {
+    font-size: $body-size;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: $font-stack;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+a {
+	color: $link-color;
+	background: transparent;
+	text-decoration: none;
+	&:hover,
+	&:focus {
+        color: $link-color-hover;
+	}
+	img {
+		vertical-align: middle;
+	}
+}

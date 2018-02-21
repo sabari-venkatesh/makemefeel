@@ -1,7 +1,2 @@
-$color: blue;
+@import 'utilities/all';
 @import 'base/all';
-div {
-	background: $color url('../images/StockGraph.jpg');
-	width: 300px;
-	height: 300px;
-}

@@ -4,7 +4,7 @@
   "description": "giving back to the community where I learnt from",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --colors",
+    "dev": "webpack-dev-server --progress --colors --hot --inline",
     "start": "webpack && npm run dev",
     "build": "webpack -p --env.APP_ENV=prod",
     "test": "echo \"Error: no test specified\" && exit 1"

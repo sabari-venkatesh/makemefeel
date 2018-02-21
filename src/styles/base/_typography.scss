@@ -1,0 +1,26 @@
+$show-baseline=true !default;
+
+html {
+	@if $show-baseline == true {
+		$baseline-size: strip-units($base-line-height);
+		//background-image: url(http://basehold.it/i/#{$baseline-size});
+		//background-image: url('../img/baseline_21.png');
+		&:after {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			height: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: $body-width;
+			@include baseline-grid($baseline-size);
+		}
+	}
+	font-size: $base-font-size;
+	-webkit-font-smoothing: antialiased;
+	line-height: $rhythm;
+	@media only screen and (min-width: 1824px) {
+		font-size: 24px;
+	}
+}

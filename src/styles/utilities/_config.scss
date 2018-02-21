@@ -1,0 +1,44 @@
+$base-font-size: 14px;
+$rhythm: 1.5;
+$base-line-height: $rhythm * $base-font-size;
+$type-ratio: 1.618;
+$font-stack: 'MyriadPro-Regular', Arial, Helvetica, sans-serif;
+
+$show-baseline: false !default;
+$grid-columns: 12;
+// Colors
+$color-primary: #F29535;
+$color-secondary: #B41E34;
+$color-success: #007f00;
+$color-warning: #f8d217;
+$color-alert: #DE6262;
+
+$color-brand: $color-primary;
+
+$black: #010101;
+$white: #fff;
+$gray: #a3a3a3;
+$color-link: #0C8FBE;
+$button-bgcolor: #D7D7D7;
+$button-color: #6B6B6B;
+$button-primary-bgcolor: $color-primary;
+$button-primary-color: $white;
+$input-border: lighten($color-secondary, 45%);
+$input-color: lighten($black, 45%);
+$input-hover: $color-secondary;
+$input-bgcolor: $white;
+$menu-bordercolor: #D4D4D4;
+$menu-bgcolor: #EAEAE4;
+$menuitem-active-bgcolor: #949494;
+$menuitem-active-color: $white;
+$animation-duration: 0.2s;
+$layers: ( modal: 200, navoverlay: 99, navtoggle: 100, navmenu: 150 );
+
+$body-width: 1200px;
+$gutter-width: $base-font-size;
+
+// Media query breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+$spacers: 7 !default;

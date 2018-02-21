@@ -73,9 +73,9 @@ module.exports = {
     	]
     },
     output: {
-		filename: 'js/[chunkhash].[name].js',
+		filename: 'js/[hash].[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: '' // provide a cdn url if you are hosting your assets there
     },
     plugins: [
     	extractSass,

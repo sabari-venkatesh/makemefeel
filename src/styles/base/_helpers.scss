@@ -1,0 +1,84 @@
+.is-clearfix {
+	@include clearfix;
+}
+
+.is-vcenter {
+	align-items: center;
+}
+
+.is-hcenter {
+	justify-content: center;
+}
+
+.is-spaced-between {
+	justify-content: space-between;
+}
+
+.is-spaced-around {
+	justify-content: space-around;
+}
+
+.d-flex {
+	display: flex;
+	flex-direction: row;
+	@extend .is-vcenter;
+	@extend .is-hcenter;
+}
+
+.img--responsive {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	@include space(1);
+}
+
+.float--right {
+	float: right;
+}
+
+.text--lead {
+	@include font-size(0);
+}
+
+.text--bold {
+	font-family: Roboto-Bold;
+}
+
+.text--center {
+	text-align: center;
+}
+
+.text--right {
+	text-align: right;
+}
+
+.text--uppercase {
+	text-transform: uppercase;
+}
+
+.text--muted {
+	color: $gray;
+}
+
+@each $prop, $abbr in (margin: m, padding: p) {
+
+	@for $spacer from 0 through $spacers {
+		.#{$abbr}-#{$spacer} {
+			@include space($spacer/4, #{$prop});
+		}
+		.#{$abbr}t-#{$spacer} {
+			@include space($spacer/4, #{$prop}-top);
+		}
+		.#{$abbr}l-#{$spacer} {
+			@include space($spacer/4, #{$prop}-left);
+		}
+		.#{$abbr}r-#{$spacer} {
+			@include space($spacer/4, #{$prop}-right);
+		}
+		.#{$abbr}b-#{$spacer} {
+			@include space($spacer/4, #{$prop}-bottom);
+		}
+	}
+}

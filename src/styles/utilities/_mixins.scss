@@ -1,0 +1,72 @@
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+	$extmods: ( eot: "?", svg: "#" + str-replace($name, " ", "_"));
+	$formats: ( otf: "opentype", ttf: "truetype");
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+@mixin font-size($scale) {
+	$font-size: round($base-font-size * power($type-ratio, $scale));
+	font-size: if($font-size < $base-font-size, $base-font-size, $font-size);
+	font-size: if($font-size < $base-font-size, $base-font-size, $font-size) / $base-font-size + rem;
+	line-height: ceil($font-size / $base-line-height) * $base-line-height;
+	line-height: ceil($font-size / $base-line-height) * $base-line-height / $base-font-size + rem;
+}
+
+@mixin clearfix() {
+	&:after {
+		clear: both;
+		content: "";
+		display: table;
+	}
+}
+
+@mixin baseline-grid($baseline, $columns: 12) {
+	$column-color: rgba(200,0,0,.2);
+	$baseline-color: rgba(56,255,255,.8);
+
+	$gutters: ($columns - 1);
+	$column-width: $body-width / $columns;
+
+	background-image: -webkit-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+							-webkit-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+	background-image: -moz-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+							-moz-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+	background-image: -o-linear-gradient(0deg, $column-color $column-width, transparent $gutter-width),
+							-o-linear-gradient(top, rgba(0,0,0,0) 95%, $baseline-color 100%);
+	background-size: ($column-width + $gutter-width) 100%, 100% $baseline+px;
+	background-position: $gutter-width 0px; // Use to offset and center your grid
+}
+
+@mixin space($offset: 2,
+$property: margin-bottom) {
+	#{$property}: $offset * $base-line-height;
+	#{$property}: $offset * $rhythm + rem;
+}
+
+@mixin rgba($color, $transparency: 1) {
+	background: $color;
+	background: rgba($color, $transparency);
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
